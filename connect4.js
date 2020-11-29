@@ -13,16 +13,16 @@ for(let i = 0; i < tablecell.length; i++){
 }
 
 while(!player1){
-    var player1 = prompt('Player one: Enter your name, You will be ');
+    var player1 = prompt('Player one: Enter your name, You will be blue');
 }
 
-player1Color = '';
+player1Color = 'blue';
 
 while(!player2){
-    var player2 = prompt("Player two: Enter your name, you will be ");
+    var player2 = prompt("Player two: Enter your name, you will be yellow");
 }
 
-player2Color = '';
+player2Color = 'yellow';
 
 var currentPlayer = 1;
 playerTurn.textContent = `${player1}'s turn`;
@@ -41,6 +41,12 @@ function changeColor(e){
             row.push(tableRow[i].children[column]);
             if(currentPlayer === 1){
                 row[0].style.backgroundColor = player1Color;
+                playerTurn.textContent = `${player2}'s turn`;
+                return currentPlayer = 2;
+            }else{
+                row[0].style.backgroundColor = player1Color;
+                playerTurn.textContent = `${player1}'s turn`;
+                return currentPlayer = 1;
             }
         }
     }
