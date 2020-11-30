@@ -114,7 +114,6 @@ header h1 {
 }
 
 .game table {
-  background-color: #0a0038;
   border-radius: 8px;
   padding: 8px;
   margin-top: 16px;
@@ -126,6 +125,15 @@ header h1 {
   height: 40px;
 }
 
+.game table.selector,
+.game table.selector tr td {
+  border: 2px solid #aaa;
+}
+
+.game table.board {
+  background-color: #0a0038;
+}
+
 button {
   padding: 8px 16px;
   text-align: center;
@@ -135,4 +143,6 @@ button {
 
 button.reset {
   margin-top: 16px;
+  color: white;
+  background-color: #bb0130;
 }
