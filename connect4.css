@@ -113,3 +113,15 @@ header h1 {
 .player-disc.player-2 {
   background-color: #fffb00;
 }
+
+.game table {
+  background-color: #0a0038;
+  border-radius: 8px;
+  padding: 8px;
+}
+
+.game table tr td {
+  border-radius: 50%;
+  width: 40px;
+  height: 40px;
+}
