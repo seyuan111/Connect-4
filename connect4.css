@@ -1,3 +1,8 @@
+html,
+body {
+  font-size: 16px;
+}
+
 * {
   margin: 0;
   padding: 0;
@@ -7,28 +12,104 @@
   font-family: "Roboto", "Segoe UI", Verdana, Geneva, Tahoma, sans-serif;
 }
 
+.box {
+  display: flex;
+}
+
+.box.column {
+  flex-direction: column;
+}
+
+.box.center {
+  align-items: center;
+  justify-content: center;
+}
+
+.box.center-left {
+  justify-content: flex-start;
+  align-items: center;
+}
+
+.box.center-right {
+  justify-content: flex-end;
+  align-items: center;
+}
+
+.box.center-top {
+  justify-content: center;
+  align-items: flex-start;
+}
+
+.box.center-bottom {
+  justify-content: center;
+  align-items: flex-end;
+}
+
+h1 {
+  font-size: 124%;
+}
+
+h2 {
+  font-size: 116%;
+}
+
+header {
+  padding: 8px 16px;
+  background-color: #00a0f9;
+  color: white;
+}
+
+header h1 {
+  flex-grow: 1;
+}
+
+.turn-box {
+  background-color: #dedede;
+  padding: 8px;
+  font-weight: bold;
+}
+
+.turn-box .Your-Turn {
+  margin-left: 8px;
+}
+
+.player-box {
+  border-radius: 300px;
+  padding: 8px;
+  margin-right: 32px;
+}
+
+.player-box .player-text {
+  margin-right: 8px;
+  font-weight: bold;
+  color: #444;
+}
+
 .player-disc {
   border-radius: 50%;
-  width: 100px;
-  height: 100px;
-  border: 5px solid #dddddd;
+  width: 40px;
+  height: 40px;
+  border: 2px solid #fefefe;
+}
+
+.player-disc.small {
+  width: 24px;
+  height: 24px;
 }
 
 .player-disc.active {
   border-color: #10be00;
 }
 
-.player-disc .player-1,
-.player-disc .player-2 {
+.player-disc.player-1,
+.player-disc.player-2 {
   border-radius: 50%;
-  width: 100px;
-  height: 100px;
 }
 
 .player-disc.player-1 {
-  background-color: #da001d;
+  background-color: #004cda;
 }
 
 .player-disc.player-2 {
-  background-color: #d6d300;
+  background-color: #fffb00;
 }
