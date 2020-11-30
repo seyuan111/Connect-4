@@ -11,13 +11,13 @@ for (let i = 0; i < tablecell.length; i++) {
   });
 }
 
-while (!player1) {
+if (!player1) {
   player1 = prompt("Player one: Enter your name, You will be blue");
 }
 
 player1Color = "blue";
 
-while (!player2) {
+if (!player2) {
   player2 = prompt("Player two: Enter your name, you will be yellow");
 }
 
