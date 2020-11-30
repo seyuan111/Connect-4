@@ -8,16 +8,23 @@
     <title>Connect-4 Game</title>
   </head>
   <body>
-    <header>
-      <h1>Welcome to Connect-4!</h1>
-      <div class="player-disc">
-        <span class="player-1">Player 1</span>
+    <header class="box center-left">
+      <h1>Connect-4!</h1>
+      <div class="box center">
+        <div class="box center player-box">
+          <span class="player-text">Player 1</span>
+          <span class="player-disc player-1"></span>
+        </div>
+        <div class="box center player-box">
+          <span class="player-text">Player 2</span>
+          <span class="player-disc player-2"></span>
+        </div>
       </div>
-      <div class="player-disc">
-        <span class="player-2">Player 2</span>
-      </div>
-      <h2 class="Your-Turn"></h2>
     </header>
+    <section class="box center-left turn-box">
+      <span class="player-disc small active"></span>
+      <span class="Your-Turn"></span>
+    </section>
     <div class="game">
       <table>
         <tr>
