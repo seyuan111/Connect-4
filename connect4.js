@@ -1,8 +1,9 @@
 var tableflow = document.getElementsByTagName("tr");
 var tablecell = document.getElementsByTagName("td");
 var tableslot = document.querySelector(".slot");
-const playerturn = document.querySelector(".Your-Turn");
+const playerTurn = document.querySelector(".Your-Turn");
 const reset = document.querySelector(".reset");
+var player1, player2, player1Color, player2Color;
 
 for (let i = 0; i < tablecell.length; i++) {
   tablecell[i].addEventListener(".click", (e) => {
@@ -11,13 +12,13 @@ for (let i = 0; i < tablecell.length; i++) {
 }
 
 while (!player1) {
-  var player1 = prompt("Player one: Enter your name, You will be blue");
+  player1 = prompt("Player one: Enter your name, You will be blue");
 }
 
 player1Color = "blue";
 
 while (!player2) {
-  var player2 = prompt("Player two: Enter your name, you will be yellow");
+  player2 = prompt("Player two: Enter your name, you will be yellow");
 }
 
 player2Color = "yellow";
