@@ -4,6 +4,8 @@ var tableslot = document.querySelector(".slot");
 const playerTurn = document.querySelector(".Your-Turn");
 const reset = document.querySelector(".reset");
 const turnDisc = playerTurn.previousElementSibling;
+const player1NameElem = document.querySelector("#player-1-name");
+const player2NameElem = document.querySelector("#player-2-name");
 var player1, player2, player1Color, player2Color;
 
 function changePlayerTurn(currentPlayer) {
@@ -56,18 +58,20 @@ function startGame() {
 
   if (!player1) {
     player1 = prompt("Player one: Enter your name, You will be blue");
+    player1NameElem.textContent = player1;
   }
 
   player1Color = "#004cda";
 
   if (!player2) {
     player2 = prompt("Player two: Enter your name, you will be yellow");
+    player2NameElem.textContent = player2;
   }
 
   player2Color = "#fffb00";
 
   var currentPlayer = 1;
-  changePlayerTurn();
+  changePlayerTurn(currentPlayer);
 }
 
 startGame();
