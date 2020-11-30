@@ -73,15 +73,23 @@ function checkWinner() {
     }
   }
 
-  if (player1Spots.length >= 4 || player2Spots >= 4) {
-    let player1Win = checkPlayerSpots(player1, player1Spots);
-    let player2Win = checkPlayerSpots(player2, player2Spots);
+  if (player1Spots.length >= 4) {
+    checkPlayerSpots(player1, player1Spots);
+  }
+  if (player2Spots.length >= 4) {
+    checkPlayerSpots(player2, player2Spots);
   }
 }
 
-function disableBoard() {}
+function disableBoard() {
+  Array.prototype.forEach.call(tablecell, (cell) => {
+    cell.removeEventListener("click", changeColor);
+  });
+}
 
-function resetBoard() {}
+function resetBoard() {
+  startGame();
+}
 
 function startGame() {
   Array.prototype.forEach.call(tablecell, (cell) => {
