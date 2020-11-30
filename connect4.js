@@ -41,11 +41,10 @@ function changeColor(e) {
         row[0].style.backgroundColor = player1Color;
         playerTurn.textContent = `${player2}'s turn`;
         return (currentPlayer = 2);
-      } else {
-        row[0].style.backgroundColor = player1Color;
-        playerTurn.textContent = `${player1}'s turn`;
-        return (currentPlayer = 1);
       }
+      row[0].style.backgroundColor = player1Color;
+      playerTurn.textContent = `${player1}'s turn`;
+      return (currentPlayer = 1);
     }
   }
 }
