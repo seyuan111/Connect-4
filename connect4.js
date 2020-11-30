@@ -54,37 +54,28 @@ function changeColor(e) {
 
 function checkWinner() {
   console.log({ player1Spots, player2Spots });
-  let player1Win = 1;
-  let player2Win = 1;
-  if (player1Spots.length >= 4) {
-    let player1PreviousRow = player1Spots[0][0];
-    let player1PreviousColumn = player1Spots[0][1];
-    player1Spots.forEach(function ([row, column]) {
-      player1Win +=
-        Math.abs(player1PreviousRow - row) +
-        Math.abs(player1PreviousColumn - column);
-      player1PreviousRow = row;
-      player1PreviousColumn = column;
+
+  function checkPlayerSpots(player, spots) {
+    let playerWin = 1;
+    let playerPreviousRow = player1Spots[0][0];
+    let playerPreviousColumn = player1Spots[0][1];
+    spots.forEach(function ([row, column]) {
+      playerWin +=
+        Math.abs(playerPreviousRow - row) +
+        Math.abs(playerPreviousColumn - column);
+      playerPreviousRow = row;
+      playerPreviousColumn = column;
     });
-    if (player1Win === 4) {
-      playerTurn.textContent = `${player1} wins!`;
-      console.log(`${player1} wins!`);
+    if (playerWin === 4) {
+      playerTurn.textContent = `${player} wins!`;
+      console.log(`${player} wins!`);
+      return disableBoard();
     }
   }
-  if (player2Spots.length >= 4) {
-    let player2PreviousRow = player2Spots[0][0];
-    let player2PreviousColumn = player2Spots[0][1];
-    player2Spots.forEach(function ([row, column]) {
-      player2Win +=
-        Math.abs(player2PreviousRow - row) +
-        Math.abs(player2PreviousColumn - column);
-      player2PreviousRow = row;
-      player2PreviousColumn = column;
-    });
-    if (player2Win === 4) {
-      playerTurn.textContent = `${player2} wins!`;
-      console.log(`${player2} wins!`);
-    }
+
+  if (player1Spots.length >= 4 || player2Spots >= 4) {
+    let player1Win = checkPlayerSpots(player1, player1Spots);
+    let player2Win = checkPlayerSpots(player2, player2Spots);
   }
 }
 
