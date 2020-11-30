@@ -41,13 +41,13 @@ function changeColor(e) {
       if (currentPlayer === 1) {
         rows[0].style.backgroundColor = player1Color;
         player1Spots.push([row, column]);
-        checkWinner();
-        return changePlayerTurn(2);
+        changePlayerTurn(2);
+        return checkWinner();
       }
       rows[0].style.backgroundColor = player2Color;
       player2Spots.push([row, column]);
-      checkWinner();
-      return changePlayerTurn(1);
+      changePlayerTurn(1);
+      return checkWinner();
     }
   }
 }
