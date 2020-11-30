@@ -5,3 +5,29 @@
 	border: none;
 	outline: none;
 }
+
+.player-disc {
+	border-radius: 50%;
+	width: 100px;
+	height: 100px;
+	border: 5px solid #dddddd;
+}
+
+.player-disc.active {
+	border-color: #10be00;
+}
+
+.player-disc .player-1,
+.player-disc .player-2 {
+	border-radius: 50%;
+	width: 100px;
+	height: 100px;
+}
+
+.player-disc.player-1 {
+	background-color: #da001d;
+}
+
+.player-disc.player-2 {
+	background-color: #d6d300;
+}
