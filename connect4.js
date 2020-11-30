@@ -55,7 +55,7 @@ function changeColor(e) {
 function checkWinner() {
   console.log({ player1Spots, player2Spots });
 
-  function checkPlayerSpots(player, spots) {
+  function checkPlayerSpots(player, spots, color) {
     let playerWin = 1;
     let playerPreviousRow = player1Spots[0][0];
     let playerPreviousColumn = player1Spots[0][1];
@@ -69,15 +69,16 @@ function checkWinner() {
     if (playerWin === 4) {
       playerTurn.textContent = `${player} wins!`;
       console.log(`${player} wins!`);
+      turnDisc.style.backgroundColor = color;
       return disableBoard();
     }
   }
 
   if (player1Spots.length >= 4) {
-    checkPlayerSpots(player1, player1Spots);
+    checkPlayerSpots(player1, player1Spots, player1Color);
   }
   if (player2Spots.length >= 4) {
-    checkPlayerSpots(player2, player2Spots);
+    checkPlayerSpots(player2, player2Spots, player2Color);
   }
 }
 
@@ -88,6 +89,9 @@ function disableBoard() {
 }
 
 function resetBoard() {
+  currentPlayer = 1;
+  player1Spots = [];
+  player2Spots = [];
   startGame();
 }
 
