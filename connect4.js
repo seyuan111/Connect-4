@@ -3,28 +3,27 @@ var tablecell = document.getElementsByTagName("td");
 var tableslot = document.querySelector(".slot");
 const playerTurn = document.querySelector(".Your-Turn");
 const reset = document.querySelector(".reset");
+const turnDisc = playerTurn.previousElementSibling;
 var player1, player2, player1Color, player2Color;
 
-for (let i = 0; i < tablecell.length; i++) {
-  tablecell[i].addEventListener(".click", (e) => {
-    console.log(`${e.target.parentElement.rowIndex}, ${e.target.cellIndex}`);
-  });
+function changePlayerTurn(currentPlayer) {
+  function setColorAndTurn(playerName, playerColor) {
+    turnDisc.style.backgroundColor = playerColor;
+    playerTurn.textContent = `${playerName}'s turn`;
+  }
+  switch (currentPlayer) {
+    case 1: {
+      setColorAndTurn(player1, player1Color);
+      break;
+    }
+    case 2: {
+      setColorAndTurn(player2, player2Color);
+      break;
+    }
+    default:
+      break;
+  }
 }
-
-if (!player1) {
-  player1 = prompt("Player one: Enter your name, You will be blue");
-}
-
-player1Color = "blue";
-
-if (!player2) {
-  player2 = prompt("Player two: Enter your name, you will be yellow");
-}
-
-player2Color = "yellow";
-
-var currentPlayer = 1;
-playerTurn.textContent = `${player1}'s turn`;
 
 Array.prototype.forEach.call(tablecell, (cell) => {
   cell.addEventListener("click", changeColor);
@@ -40,12 +39,35 @@ function changeColor(e) {
       row.push(tableRow[i].children[column]);
       if (currentPlayer === 1) {
         row[0].style.backgroundColor = player1Color;
-        playerTurn.textContent = `${player2}'s turn`;
-        return (currentPlayer = 2);
+        return changePlayerTurn(2);
       }
-      row[0].style.backgroundColor = player1Color;
-      playerTurn.textContent = `${player1}'s turn`;
-      return (currentPlayer = 1);
+      row[0].style.backgroundColor = player2Color;
+      return changePlayerTurn(1);
     }
   }
 }
+
+function startGame() {
+  for (let i = 0; i < tablecell.length; i++) {
+    tablecell[i].addEventListener(".click", (e) => {
+      console.log(`${e.target.parentElement.rowIndex}, ${e.target.cellIndex}`);
+    });
+  }
+
+  if (!player1) {
+    player1 = prompt("Player one: Enter your name, You will be blue");
+  }
+
+  player1Color = "#004cda";
+
+  if (!player2) {
+    player2 = prompt("Player two: Enter your name, you will be yellow");
+  }
+
+  player2Color = "#fffb00";
+
+  var currentPlayer = 1;
+  changePlayerTurn();
+}
+
+startGame();
