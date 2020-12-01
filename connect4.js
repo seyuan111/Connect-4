@@ -7,9 +7,11 @@ const turnDisc = playerTurn.previousElementSibling;
 const player1NameElem = document.querySelector("#player-1-name");
 const player2NameElem = document.querySelector("#player-2-name");
 var player1, player2, player1Color, player2Color;
-var currentPlayer = 1;
-var player1Spots = [];
-var player2Spots = [];
+var currentPlayer = 1,
+  counter = 0;
+var player1Spots = [[], []];
+var player2Spots = [[], []];
+let isWin = false;
 
 function changePlayerTurn(current) {
   currentPlayer = current;
@@ -40,44 +42,84 @@ function changeColor(e) {
       const row = rows[0].parentElement.rowIndex;
       if (currentPlayer === 1) {
         rows[0].style.backgroundColor = player1Color;
-        player1Spots.push([row, column]);
+        player1Spots[0].push(row);
+        player1Spots[1].push(column);
         changePlayerTurn(2);
+        counter += 1;
         return checkWinner();
       }
       rows[0].style.backgroundColor = player2Color;
-      player2Spots.push([row, column]);
+      player2Spots[0].push(row);
+      player2Spots[1].push(column);
       changePlayerTurn(1);
+      counter += 1;
       return checkWinner();
     }
   }
 }
 
 function checkWinner() {
-  console.log({ player1Spots, player2Spots });
-
   function checkPlayerSpots(player, spots, color) {
-    let playerWin = 1;
-    let playerPreviousRow = player1Spots[0][0];
-    let playerPreviousColumn = player1Spots[0][1];
-    spots.forEach(function ([row, column]) {
-      playerWin +=
-        Math.abs(playerPreviousRow - row) +
-        Math.abs(playerPreviousColumn - column);
-      playerPreviousRow = row;
-      playerPreviousColumn = column;
+    let rowsColumns = [];
+    spots.forEach(function (list) {
+      const sorted = list.sort();
+      rowsColumns.push(
+        sorted.filter(function (value, index, self) {
+          return self.indexOf(value) === index;
+        })
+      );
     });
-    if (playerWin === 4) {
-      playerTurn.textContent = `${player} wins!`;
-      console.log(`${player} wins!`);
-      turnDisc.style.backgroundColor = color;
+    if (counter !== 42) {
+      const entry1 = rowsColumns[0];
+      const entry2 = rowsColumns[1];
+      if (entry1.length === 4 && entry2.length === 4) {
+        isWin = entry1.every(function (value, index, self) {
+          if (index !== self.length - 1) {
+            return (
+              value - self[index + 1] === -1 &&
+              entry2[index] - entry2[index + 1] === -1
+            );
+          }
+          return (
+            value - self[index - 1] === 1 &&
+            entry2[index] - entry2[index - 1] === 1
+          );
+        });
+      } else if (
+        (entry1.length === 4 && entry2.length === 1) ||
+        (entry1.length === 1 && entry2.length === 4)
+      ) {
+        function checkWin(data) {
+          return data.every(function (value, index, self) {
+            if (index !== self.length - 1) {
+              return value - self[index + 1] === -1;
+            }
+            return value - self[index - 1] === 1;
+          });
+        }
+        if (entry1.length === 4) {
+          isWin = checkWin(entry1);
+        } else if (entry2.length === 4) {
+          isWin = checkWin(entry2);
+        }
+      }
+      if (isWin) {
+        playerTurn.textContent = `${player} wins! Reset game.`;
+        console.log(`${player} wins! Reset game.`);
+        turnDisc.style.backgroundColor = color;
+        isWin = false;
+        return disableBoard();
+      }
+    } else {
+      playerTurn.textContent = `Draw! Reset game.`;
+      console.log(`Draw! Reset game.`);
+      turnDisc.style.backgroundColor = "black";
       return disableBoard();
     }
   }
 
-  if (player1Spots.length >= 4) {
+  if (counter >= 7) {
     checkPlayerSpots(player1, player1Spots, player1Color);
-  }
-  if (player2Spots.length >= 4) {
     checkPlayerSpots(player2, player2Spots, player2Color);
   }
 }
@@ -90,8 +132,10 @@ function disableBoard() {
 
 function resetBoard() {
   currentPlayer = 1;
-  player1Spots = [];
-  player2Spots = [];
+  counter = 0;
+  isWin = false;
+  player1Spots = [[], []];
+  player2Spots = [[], []];
   startGame();
 }
 
